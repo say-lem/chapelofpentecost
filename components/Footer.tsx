@@ -77,7 +77,7 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(201,151,58,0.15)' }}>
           <p className="font-sans text-[11px]"
             style={{ fontFamily: 'Jost, sans-serif', color: 'rgba(237,227,204,0.3)', fontSize: '11px' }}>
-            © {currentYear} St. Aidan&apos;s Anglican Church. All rights reserved.
+            © {currentYear} Chapel of Pentecost. All rights reserved.
           </p>
           <p className="font-sans text-[11px] italic"
             style={{ fontFamily: 'Jost, sans-serif', color: 'rgba(201,151,58,0.4)', fontSize: '11px' }}>

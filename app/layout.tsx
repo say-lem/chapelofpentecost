@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'St. Aidan\'s Anglican Church',
-  description: 'An Orthodox Anglican parish — rooted in ancient faith, alive in worship.',
+  title: 'Chapel of Pentecost',
+  description: 'An Orthodox Anglican church — rooted in ancient faith, alive in worship.',
   keywords: 'Anglican, Orthodox, Church, Traditional, Worship, Parish',
 }
 

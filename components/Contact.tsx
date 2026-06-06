@@ -72,7 +72,7 @@ export default function Contact() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="St. Aidan's Church location"
+                title="Chapel of Pentecost location"
               />
             </div>
           </div>

@@ -3,8 +3,8 @@ import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog — St. Aidan\'s Anglican Church',
-  description: 'Reflections, teachings, and news from the parish of St. Aidan\'s Anglican Church.',
+  title: 'Blog — Chapel of Pentecost',
+  description: 'Reflections, teachings, and news from the parish of Chapel of Pentecost.',
 }
 
 const BLOGGER_FEED_URL =
