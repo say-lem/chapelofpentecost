@@ -52,7 +52,7 @@ export default function About() {
             >
               <span className="font-display text-2xl font-bold text-white leading-none"
                 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: 'white' }}>
-                1887
+                2004
               </span>
               <span className="font-sans text-[9px] tracking-widest uppercase text-white/80"
                 style={{ fontFamily: 'Jost, sans-serif', fontSize: '9px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.8)' }}>
@@ -88,9 +88,9 @@ export default function About() {
 
             <div className="mt-10 grid grid-cols-3 gap-6">
               {[
-                { num: '400+', label: 'Congregation' },
-                { num: '8', label: 'Ministries' },
-                { num: '137', label: 'Years of Faith' },
+                { num: '100+', label: 'Congregation' },
+                { num: '3', label: 'Ministers' },
+                { num: '22', label: 'Years of Faith' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center border-t-2 pt-4" style={{ borderColor: '#C9973A' }}>
                   <div className="font-display text-3xl font-semibold"
@@ -104,6 +104,7 @@ export default function About() {
                 </div>
               ))}
             </div>
+
           </div>
         </div>
       </div>

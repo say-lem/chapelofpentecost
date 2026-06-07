@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -10,10 +12,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <svg viewBox="0 0 32 32" fill="none" className="w-7 h-7">
-                <rect x="14" y="2" width="4" height="28" fill="#C9973A" />
-                <rect x="4" y="10" width="24" height="4" fill="#C9973A" />
-              </svg>
+              <div className="relative w-10 h-10 overflow-hidden rounded-full shrink-0">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Chapel of Pentecost logo"
+                  width={40}
+                  height={40}
+                  className="object-cover w-full h-full"
+                />
+              </div>
               <div>
                 <span className="font-display text-lg font-semibold text-cream-50 block leading-none"
                   style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#FDFAF4' }}>

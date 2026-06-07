@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -34,12 +35,14 @@ export default function Navbar() {
       <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8 flex items-center justify-center">
-            {/* Cross SVG */}
-            <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8">
-              <rect x="14" y="2" width="4" height="28" fill="#C9973A" />
-              <rect x="4" y="10" width="24" height="4" fill="#C9973A" />
-            </svg>
+          <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden rounded-full">
+            <Image
+              src="/logo.jpeg"
+              alt="Chapel of Pentecost logo"
+              width={40}
+              height={40}
+              className="object-cover w-full h-full"
+            />
           </div>
           <div>
             <span className="font-display text-cream-50 text-lg font-semibold tracking-wide leading-none block"

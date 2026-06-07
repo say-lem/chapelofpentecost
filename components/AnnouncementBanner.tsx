@@ -1,7 +1,7 @@
 const announcements = [
-  { label: 'Sunday Eucharist', time: '8:00 AM & 10:30 AM' },
-  { label: 'Wednesday Evensong', time: '6:30 PM' },
-  { label: 'Choir Rehearsal', time: 'Friday 7:00 PM' },
+  { label: 'Sunday Worship', time: '8:00 AM – 11:00 AM' },
+  { label: 'Wednesday Midweek Service', time: '5:00 PM – 6:30 PM' },
+  { label: 'Choir Rehearsal', time: 'Saturday 4:00 PM' },
 ]
 
 export default function AnnouncementBanner() {
