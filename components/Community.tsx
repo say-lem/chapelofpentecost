@@ -3,7 +3,7 @@ import Image from 'next/image'
 const ministries = [
   {
     title: 'Choir & Music',
-    desc: 'Rooted in the Anglican choral tradition — from plainsong to Byrd, Tallis, and beyond.',
+    desc: 'Choir and music: a blend of extempore and liturgical worship',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
   },
   {

@@ -5,13 +5,13 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        <Image
+        {/* <Image
           src="https://images.unsplash.com/photo-1548625361-58a9d86b2a9d?w=1800&auto=format&fit=crop&q=80"
           alt="Church interior"
           fill
           className="object-cover object-center"
           priority
-        />
+        /> */}
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#06091A]/80 via-[#0A0E2A]/70 to-[#06091A]/90" />
         {/* Subtle texture */}
@@ -39,7 +39,7 @@ export default function Hero() {
           className="animate-fade-in-up animate-delay-200 font-sans text-gold-400 text-[11px] tracking-[0.35em] uppercase mb-5"
           style={{ fontFamily: 'Jost, sans-serif', color: '#E8C060', fontSize: '11px', letterSpacing: '0.35em' }}
         >
-          Orthodox Anglican Church · Est. 2007
+          Orthodox Anglican Church · Est. 2004
         </p>
 
         {/* Headline */}
