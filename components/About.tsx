@@ -32,7 +32,7 @@ export default function About() {
           <div className="relative">
             <div className="relative h-[500px] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1543248939-ff40856f65d4?w=800&auto=format&fit=crop&q=80"
+                src="/chucrh-photo.jpg"
                 alt="Church exterior"
                 fill
                 className="object-cover"

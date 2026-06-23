@@ -5,8 +5,8 @@ const staff = [
   {
     name: 'Canon JVen. Prof. Chikere A. Anusiem ',
     role: 'Vicar-Chaplain i/c',
-    email: '',
-    phone: '',
+    email: 'chanusiem@gmail.com',
+    phone: '+2348036717200',
     image: 'https://chapelofhisresurrection.org/wp-content/uploads/2022/10/chikere-anusiem-cohr-enugu.jpg',
   },
   {
@@ -19,17 +19,17 @@ const staff = [
   {
     name: 'Rev. Dr. Enyereibe Chuks Ajare',
     role: "Chaplain",
-    email: '',
+    email: 'dcajare@gmail.com',
     phone: ' +2348062134999',
     image: 'https://chapelofhisresurrection.org/wp-content/uploads/2022/10/chuks-ajare-2.jpg',
   },
-  // {
-  //   name: 'Dorothy Finch',
-  //   role: 'Sexton',
-  //   email: 'sexton@staidsans.org',
-  //   phone: '+1 (555) 000-0004',
-  //   image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80',
-  // },
+  {
+    name: 'Ord. Dr. Ugochukwu Timothy Uchendu',
+    role: 'Ordinand',
+    email: 'ugotimuchendu@gmail.com',
+    phone: '+2348030622830',
+    image: '/ordinand.jpeg',
+  },
 ]
 
 export default function WorkersInTheVineyard() {

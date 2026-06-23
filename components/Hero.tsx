@@ -5,13 +5,13 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        {/* <Image
-          src="https://images.unsplash.com/photo-1548625361-58a9d86b2a9d?w=1800&auto=format&fit=crop&q=80"
+        <Image
+          src="/church-interior.JPG"
           alt="Church interior"
           fill
           className="object-cover object-center"
           priority
-        /> */}
+        />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#06091A]/80 via-[#0A0E2A]/70 to-[#06091A]/90" />
         {/* Subtle texture */}
@@ -39,7 +39,7 @@ export default function Hero() {
           className="animate-fade-in-up animate-delay-200 font-sans text-gold-400 text-[11px] tracking-[0.35em] uppercase mb-5"
           style={{ fontFamily: 'Jost, sans-serif', color: '#E8C060', fontSize: '11px', letterSpacing: '0.35em' }}
         >
-          Orthodox Anglican Church · Est. 2004
+          Hospital Chaplency · Est. 2004
         </p>
 
         {/* Headline */}
@@ -47,9 +47,11 @@ export default function Hero() {
           className="animate-fade-in-up animate-delay-300 font-display text-cream-50 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.05] mb-6"
           style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#FDFAF4' }}
         >
-          Rooted in Faith,
+          Living by 
           <br />
-          <em className="italic" style={{ color: '#E8C060' }}>Alive in Worship</em>
+          <em className="italic" style={{ color: '#E8C060' }}>Every Word </em>
+          <br/>
+          Of God
         </h1>
 
         {/* Ornament */}
@@ -80,11 +82,11 @@ export default function Hero() {
             Service Times
           </a>
           <a
-            href="#about"
+            href="#online-worship"
             className="font-sans text-[12px] tracking-[0.2em] uppercase px-8 py-4 border border-cream-200/40 text-cream-100 hover:border-gold-500/60 hover:text-gold-400 transition-all duration-300"
             style={{ fontFamily: 'Jost, sans-serif', fontSize: '12px', letterSpacing: '0.2em', color: '#F7F0E0', border: '1px solid rgba(237,227,204,0.4)' }}
           >
-            Learn More
+            Online service
           </a>
         </div>
       </div>

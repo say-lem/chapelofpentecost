@@ -77,7 +77,46 @@ body {
 .animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
 .animate-delay-500 { animation-delay: 0.5s; opacity: 0; }
 
-/* Nav link underline effect */
+/* Site header — scroll background via CSS (no JS required) */
+.site-header {
+  background-color: transparent;
+  box-shadow: none;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+}
+
+.site-header--scrolled,
+.site-header--menu-open {
+  background-color: #06091A;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+@supports (animation-timeline: scroll()) {
+  .site-header:not(.site-header--menu-open) {
+    animation: site-header-scroll linear both;
+    animation-timeline: scroll();
+    animation-range: 0 80px;
+  }
+
+  @keyframes site-header-scroll {
+    from {
+      background-color: transparent;
+      box-shadow: none;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    to {
+      background-color: #06091A;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+}
+
 .nav-link {
   position: relative;
 }

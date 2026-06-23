@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
 
@@ -78,8 +77,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Navbar />
-
       {/* Hero */}
       <div
         className="relative pt-40 pb-24 text-center overflow-hidden"

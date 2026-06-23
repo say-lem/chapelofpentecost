@@ -4,17 +4,17 @@ const ministries = [
   {
     title: 'Choir & Music',
     desc: 'Choir and music: a blend of extempore and liturgical worship',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
+    image: '/choir.jpg',
   },
   {
     title: 'Sunday School',
     desc: 'Catechesis and Christian formation for children from ages 4 through confirmation.',
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&auto=format&fit=crop&q=80',
+    image: '/sundayschool.jpg',
   },
   {
     title: 'Fellowship Groups',
     desc: 'Monthly gatherings, potlucks, and retreats that knit the congregation together in friendship and communion.',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80',
+    image: '/fellowship.jpg',
   },
 ]
 
