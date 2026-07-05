@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const FACEBOOK_PAGE_URL = 'https://www.facebook.com/profile.php?id=100070103357113'
+const FACEBOOK_PAGE_URL = 'https://www.facebook.com/people/Chapel-of-Pentecost-FNHE/100070103357113/'
 const POLL_INTERVAL_MS = 60_000
 
 type LiveStatus = {
@@ -11,38 +11,16 @@ type LiveStatus = {
   permalinkUrl?: string
 }
 
-function ResponsiveFacebookVideo({ permalinkUrl }: { permalinkUrl: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (!containerRef.current) return
-      const width = containerRef.current.offsetWidth
-      setDimensions({ width, height: Math.round((width * 9) / 16) })
-    }
-
-    updateDimensions()
-    window.addEventListener('resize', updateDimensions)
-    return () => window.removeEventListener('resize', updateDimensions)
-  }, [])
-
-  if (dimensions.width === 0) {
-    return <div ref={containerRef} className="w-full aspect-video" />
-  }
-
-  const embedSrc = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+function FacebookVideoEmbed({ permalinkUrl }: { permalinkUrl: string }) {
+  const iframeSrc = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
     permalinkUrl
-  )}&show_text=false&width=${dimensions.width}&height=${dimensions.height}`
+  )}&show_text=false&width=800&height=450&autoplay=false`
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div className="relative w-full bg-black" style={{ paddingTop: '56.25%' }}>
       <iframe
-        src={embedSrc}
-        width={dimensions.width}
-        height={dimensions.height}
-        className="w-full max-w-full border-0"
-        style={{ aspectRatio: '16 / 9' }}
+        src={iframeSrc}
+        className="absolute inset-0 h-full w-full border-0"
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         allowFullScreen
         title="Facebook Live stream"
@@ -51,17 +29,50 @@ function ResponsiveFacebookVideo({ permalinkUrl }: { permalinkUrl: string }) {
   )
 }
 
+function LiveStreamPlaceholder({ loading }: { loading: boolean }) {
+  return (
+    <a
+      href={FACEBOOK_PAGE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative flex w-full items-center justify-center bg-black/40 transition-opacity hover:opacity-90"
+      style={{ paddingTop: '56.25%' }}
+    >
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+        <div
+          className="flex h-16 w-16 items-center justify-center rounded-full"
+          style={{ backgroundColor: 'rgba(201,151,58,0.2)', border: '2px solid #C9973A' }}
+        >
+          <svg viewBox="0 0 24 24" className="ml-1 h-7 w-7" fill="#E8C060">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+        <p
+          className="font-sans text-sm tracking-[0.15em] uppercase"
+          style={{ fontFamily: 'Jost, sans-serif', color: '#E8C060' }}
+        >
+          {loading ? 'Checking for live stream…' : 'Watch on Facebook'}
+        </p>
+      </div>
+    </a>
+  )
+}
+
 export default function OnlineWorship() {
   const [live, setLive] = useState<LiveStatus | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const checkLive = async () => {
       try {
         const response = await fetch('/api/facebook-live')
+        if (!response.ok) return
         const data: LiveStatus = await response.json()
         setLive(data)
       } catch {
         setLive({ isLive: false })
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -107,16 +118,18 @@ export default function OnlineWorship() {
           </p>
         </div>
 
-        {isLive && live?.permalinkUrl && (
-          <div className="w-full max-w-4xl mx-auto space-y-6">
-            <div
-              className="overflow-hidden"
-              style={{ border: '1px solid rgba(201,151,58,0.3)' }}
-            >
-              <ResponsiveFacebookVideo permalinkUrl={live.permalinkUrl} />
-            </div>
+        <div className="w-full max-w-4xl mx-auto space-y-6">
+          <div
+            className="overflow-hidden"
+            style={{ border: '1px solid rgba(201,151,58,0.3)' }}
+          >
+            {isLive && live?.permalinkUrl ? (
+              <FacebookVideoEmbed permalinkUrl={live.permalinkUrl} />
+            ) : (
+              <LiveStreamPlaceholder loading={loading} />
+            )}
           </div>
-        )}
+        </div>
 
         <div className="flex justify-center mt-6 md:mt-8">
           <a
