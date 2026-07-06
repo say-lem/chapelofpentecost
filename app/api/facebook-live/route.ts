@@ -66,14 +66,23 @@ async function scrapeLiveFromPage(): Promise<LiveStatus | null> {
   const liveIdx = html.indexOf('is live now')
   const chunk = html.slice(Math.max(0, liveIdx - 10_000), liveIdx + 10_000)
   const idCounts = new Map<string, number>()
+  const idPattern = /"id":"(\d{15,})"/g
+  let match: RegExpExecArray | null
 
-  for (const match of chunk.matchAll(/"id":"(\d{15,})"/g)) {
+  while ((match = idPattern.exec(chunk)) !== null) {
     const id = match[1]
     if (id === PAGE_ID) continue
     idCounts.set(id, (idCounts.get(id) ?? 0) + 1)
   }
 
-  const videoId = [...idCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0]
+  let videoId: string | undefined
+  let maxCount = 0
+  idCounts.forEach((count, id) => {
+    if (count > maxCount) {
+      maxCount = count
+      videoId = id
+    }
+  })
 
   if (!videoId) return null
 

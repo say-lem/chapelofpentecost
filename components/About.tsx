@@ -67,7 +67,7 @@ export default function About() {
               className="font-display text-3xl font-light mb-6 leading-snug"
               style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#0A0E2A' }}
             >
-              A Church Committed to<br />Orthodox Anglican Christian Tradition
+              An Evangelical Church <br /> Committed to Spirit filled Liturgy <br />with extempore expressions of worship
             </h3>
             <div
               className="font-body text-lg leading-8 space-y-4"
