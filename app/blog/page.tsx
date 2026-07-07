@@ -1,9 +1,26 @@
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
 
+const TITLE = 'Blog'
+const DESCRIPTION = 'Reflections, teachings, and news from the parish of Chapel of Pentecost.'
+
 export const metadata: Metadata = {
-  title: 'Blog — Chapel of Pentecost',
-  description: 'Reflections, teachings, and news from the parish of Chapel of Pentecost.',
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    type: 'website',
+    url: '/blog',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 }
 
 const BLOGGER_FEED_URL =

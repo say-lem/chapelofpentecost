@@ -65,10 +65,9 @@ export default function Footer() {
             </h4>
             <div className="space-y-3">
               {[
-                '14 Cathedral Close',
-                'Ashford, Kent TN24 8AB',
-                '+44 (0)1233 123 456',
-                'office@staidanschurch.org',
+                'FNPH Chime Avenue',
+                'New Haven, Enugu, Enugu State, Nigeria',
+                'chapelofpentecostfnhe@gmail.com',
               ].map((line, i) => (
                 <p key={i} className="font-sans text-[13px]"
                   style={{ fontFamily: 'Jost, sans-serif', color: 'rgba(237,227,204,0.6)', fontSize: '13px' }}>
