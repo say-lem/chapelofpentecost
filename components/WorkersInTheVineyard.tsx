@@ -3,7 +3,7 @@ import Image from 'next/image'
 // Replace with real names, contact details, and photo URLs
 const staff = [
   {
-    name: 'Canon Ven. Prof. Chikere A. Anusiem ',
+    name: 'Ven. Prof. Chikere A. Anusiem ',
     role: 'Vicar-Chaplain i/c',
     email: 'chanusiem@gmail.com',
     phone: '+2348036717200',
