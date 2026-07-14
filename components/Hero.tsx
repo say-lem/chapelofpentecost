@@ -39,7 +39,7 @@ export default function Hero() {
           className="animate-fade-in-up animate-delay-200 font-sans text-gold-400 text-[11px] tracking-[0.35em] uppercase mb-5"
           style={{ fontFamily: 'Jost, sans-serif', color: '#E8C060', fontSize: '11px', letterSpacing: '0.35em' }}
         >
-          Hospital Chaplency · Est. 2004
+          Hospital Chaplaincy · Est. 2004
         </p>
 
         {/* Headline */}
