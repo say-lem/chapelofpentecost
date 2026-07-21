@@ -8,7 +8,7 @@ const services = [
   },
   {
     day: 'Sunday',
-    title: 'Martin service',
+    title: 'Mattins service',
     times: ['9:00 AM — 11:00 AM'],
     note: 'Rite I, Book of Common Prayer (1662)',
     icon: '✦',
