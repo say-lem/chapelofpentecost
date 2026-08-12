@@ -1,6 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+type YoutubeVideo = {
+  id: string
+  title: string
+  publishedAt: string
+}
 
 // Replace youtubeId values with your church's actual YouTube video IDs
 const sermons = [
@@ -35,11 +41,46 @@ const sermons = [
 
 export default function Sermons() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [youtubeVideos, setYoutubeVideos] = useState<YoutubeVideo[] | null>(null)
 
   const handlePlay = (e: React.MouseEvent, index: number) => {
     e.preventDefault()
     setActiveIndex(prev => prev === index ? null : index)
   }
+
+  useEffect(() => {
+    let cancelled = false
+
+    fetch('/api/youtube-videos')
+      .then(res => res.json())
+      .then((data: { videos?: YoutubeVideo[] }) => {
+        if (!cancelled) setYoutubeVideos(data.videos ?? [])
+      })
+      .catch(() => {
+        if (!cancelled) setYoutubeVideos([])
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const watchVideos =
+    youtubeVideos && youtubeVideos.length > 0
+      ? youtubeVideos.map(video => ({
+          youtubeId: video.id,
+          title: video.title,
+          date: new Date(video.publishedAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          }),
+        }))
+      : sermons.map(sermon => ({
+          youtubeId: sermon.youtubeId,
+          title: sermon.title,
+          date: `${sermon.season} · ${sermon.date}`,
+        }))
 
   return (
     <section id="sermons" className="py-28" style={{ backgroundColor: '#FDFAF4' }}>
@@ -243,13 +284,13 @@ export default function Sermons() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {sermons.map((sermon, i) => (
-              <div key={i} className="group">
+            {watchVideos.map((video, i) => (
+              <div key={video.youtubeId ?? i} className="group">
                 {/* Video embed */}
                 <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
                   <iframe
-                    src={`https://www.youtube.com/embed/${sermon.youtubeId}`}
-                    title={sermon.title}
+                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                    title={video.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="absolute inset-0 w-full h-full"
@@ -263,20 +304,14 @@ export default function Sermons() {
                     className="font-sans text-[10px] tracking-wider uppercase mb-1"
                     style={{ fontFamily: 'Jost, sans-serif', color: '#C9973A', fontSize: '10px', letterSpacing: '0.15em' }}
                   >
-                    {sermon.season} · {sermon.date}
+                    {video.date}
                   </p>
                   <h3
                     className="font-display text-lg font-medium mb-1"
                     style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#0A0E2A', lineHeight: 1.3 }}
                   >
-                    {sermon.title}
+                    {video.title}
                   </h3>
-                  <p
-                    className="font-body text-sm"
-                    style={{ fontFamily: 'EB Garamond, Georgia, serif', color: '#8C7B6B', fontSize: '14px' }}
-                  >
-                    {sermon.preacher}
-                  </p>
                 </div>
               </div>
             ))}
