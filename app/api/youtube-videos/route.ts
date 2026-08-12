@@ -19,6 +19,15 @@ function decodeXmlEntities(value: string): string {
     .replace(/&#39;/g, "'")
 }
 
+function extractDescriptionDate(description: string): string | null {
+  const match = description.match(/Date:\s*([A-Za-z]+\s+\d{1,2}\s*,\s*\d{4})/)
+  if (!match) return null
+
+  const normalized = match[1].replace(/\s+/g, ' ').trim()
+  const parsed = new Date(normalized)
+  return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString()
+}
+
 function parseVideos(xml: string): YoutubeVideo[] {
   const videos: YoutubeVideo[] = []
   const entryPattern = /<entry>([\s\S]*?)<\/entry>/g
@@ -29,9 +38,11 @@ function parseVideos(xml: string): YoutubeVideo[] {
     const id = entry.match(/<yt:videoId>(.*?)<\/yt:videoId>/)?.[1]
     const title = entry.match(/<title>(.*?)<\/title>/)?.[1]
     const published = entry.match(/<published>(.*?)<\/published>/)?.[1]
+    const description = entry.match(/<media:description>([\s\S]*?)<\/media:description>/)?.[1]
 
     if (id && title && published) {
-      videos.push({ id, title: decodeXmlEntities(title), publishedAt: published })
+      const descriptionDate = description ? extractDescriptionDate(decodeXmlEntities(description)) : null
+      videos.push({ id, title: decodeXmlEntities(title), publishedAt: descriptionDate ?? published })
     }
   }
 
