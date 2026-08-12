@@ -57,7 +57,7 @@ export async function POST(request: Request) {
         <p style="color: #C9973A; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 8px;">Message</p>
         <p style="font-size: 16px; line-height: 1.6; white-space: pre-wrap; margin: 0; padding: 16px; background-color: #ffffff; border: 1px solid rgba(10,14,42,0.1);">${escapeHtml(message)}</p>
         <p style="margin-top: 32px; font-size: 12px; color: rgba(10,14,42,0.5);">
-          This message was sent from the contact form on the church website. Reply directly to this email to respond to ${escapeHtml(firstName)}.
+          This message was sent from the contact form on the church website. Do not Reply directly to this email to respond to ${escapeHtml(firstName)}, reach out to the contact information on the form.
         </p>
       </div>
     </div>
