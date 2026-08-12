@@ -8,6 +8,8 @@ type YoutubeVideo = {
   id: string
   title: string
   publishedAt: string
+  preacher: string | null
+  scripture: string | null
 }
 
 function decodeXmlEntities(value: string): string {
@@ -28,6 +30,11 @@ function extractDescriptionDate(description: string): string | null {
   return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString()
 }
 
+function extractDescriptionField(description: string, label: string): string | null {
+  const match = description.match(new RegExp(`${label}:\\s*(.+)`))
+  return match ? match[1].trim() : null
+}
+
 function parseVideos(xml: string): YoutubeVideo[] {
   const videos: YoutubeVideo[] = []
   const entryPattern = /<entry>([\s\S]*?)<\/entry>/g
@@ -41,8 +48,18 @@ function parseVideos(xml: string): YoutubeVideo[] {
     const description = entry.match(/<media:description>([\s\S]*?)<\/media:description>/)?.[1]
 
     if (id && title && published) {
-      const descriptionDate = description ? extractDescriptionDate(decodeXmlEntities(description)) : null
-      videos.push({ id, title: decodeXmlEntities(title), publishedAt: descriptionDate ?? published })
+      const decodedDescription = description ? decodeXmlEntities(description) : null
+      const descriptionDate = decodedDescription ? extractDescriptionDate(decodedDescription) : null
+      const preacher = decodedDescription ? extractDescriptionField(decodedDescription, 'Preacher') : null
+      const scripture = decodedDescription ? extractDescriptionField(decodedDescription, 'Scripture') : null
+
+      videos.push({
+        id,
+        title: decodeXmlEntities(title),
+        publishedAt: descriptionDate ?? published,
+        preacher,
+        scripture,
+      })
     }
   }
 

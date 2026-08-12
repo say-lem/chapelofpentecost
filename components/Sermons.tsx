@@ -6,10 +6,22 @@ type YoutubeVideo = {
   id: string
   title: string
   publishedAt: string
+  preacher: string | null
+  scripture: string | null
 }
 
-// Replace youtubeId values with your church's actual YouTube video IDs
-const sermons = [
+type DisplaySermon = {
+  youtubeId: string
+  title: string
+  preacher: string
+  scripture: string
+  date: string
+  season?: string
+  duration?: string
+}
+
+// Fallback shown only if the YouTube feed is unreachable
+const fallbackSermons: DisplaySermon[] = [
   {
     date: 'May 17, 2025',
     season: 'Trinity Sunday',
@@ -65,22 +77,20 @@ export default function Sermons() {
     }
   }, [])
 
-  const watchVideos =
+  const displaySermons: DisplaySermon[] =
     youtubeVideos && youtubeVideos.length > 0
       ? youtubeVideos.map(video => ({
           youtubeId: video.id,
           title: video.title,
+          preacher: video.preacher ?? '',
+          scripture: video.scripture ?? '',
           date: new Date(video.publishedAt).toLocaleDateString('en-US', {
             month: 'long',
             day: 'numeric',
             year: 'numeric',
           }),
         }))
-      : sermons.map(sermon => ({
-          youtubeId: sermon.youtubeId,
-          title: sermon.title,
-          date: `${sermon.season} · ${sermon.date}`,
-        }))
+      : fallbackSermons
 
   return (
     <section id="sermons" className="py-28" style={{ backgroundColor: '#FDFAF4' }}>
@@ -113,7 +123,7 @@ export default function Sermons() {
 
         {/* Audio sermon list */}
         <div className="space-y-0">
-          {sermons.map((sermon, i) => (
+          {displaySermons.map((sermon, i) => (
             <a
               key={i}
               href="#"
@@ -131,10 +141,12 @@ export default function Sermons() {
 
               {/* Date / season */}
               <div className="shrink-0 md:w-40">
-                <p className="font-sans text-[11px] tracking-wider uppercase"
-                  style={{ fontFamily: 'Jost, sans-serif', color: '#C9973A', fontSize: '11px', letterSpacing: '0.15em' }}>
-                  {sermon.season}
-                </p>
+                {sermon.season && (
+                  <p className="font-sans text-[11px] tracking-wider uppercase"
+                    style={{ fontFamily: 'Jost, sans-serif', color: '#C9973A', fontSize: '11px', letterSpacing: '0.15em' }}>
+                    {sermon.season}
+                  </p>
+                )}
                 <p className="font-sans text-[12px]"
                   style={{ fontFamily: 'Jost, sans-serif', color: '#8C7B6B', fontSize: '12px' }}>
                   {sermon.date}
@@ -153,16 +165,18 @@ export default function Sermons() {
                   className="font-body text-base"
                   style={{ fontFamily: 'EB Garamond, Georgia, serif', color: '#8C7B6B', fontSize: '16px' }}
                 >
-                  {sermon.preacher} · <em>{sermon.scripture}</em>
+                  {sermon.preacher}{sermon.preacher && sermon.scripture ? ' · ' : ''}<em>{sermon.scripture}</em>
                 </p>
               </div>
 
               {/* Duration + play */}
               <div className="shrink-0 flex items-center gap-4">
-                <span className="font-sans text-[12px]"
-                  style={{ fontFamily: 'Jost, sans-serif', color: '#8C7B6B', fontSize: '12px' }}>
-                  {sermon.duration}
-                </span>
+                {sermon.duration && (
+                  <span className="font-sans text-[12px]"
+                    style={{ fontFamily: 'Jost, sans-serif', color: '#8C7B6B', fontSize: '12px' }}>
+                    {sermon.duration}
+                  </span>
+                )}
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-300"
                   style={{
@@ -198,8 +212,8 @@ export default function Sermons() {
               <div style={{ position: 'relative', paddingTop: '56.25%' }}>
                 <iframe
                   key={activeIndex}
-                  src={`https://www.youtube.com/embed/${sermons[activeIndex].youtubeId}?autoplay=1`}
-                  title={sermons[activeIndex].title}
+                  src={`https://www.youtube.com/embed/${displaySermons[activeIndex].youtubeId}?autoplay=1`}
+                  title={displaySermons[activeIndex].title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
@@ -245,10 +259,10 @@ export default function Sermons() {
                     Now Playing
                   </p>
                   <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: '20px', color: '#FDFAF4', fontWeight: 300 }}>
-                    {sermons[activeIndex].title}
+                    {displaySermons[activeIndex].title}
                   </p>
                   <p style={{ fontFamily: 'EB Garamond, Georgia, serif', fontSize: '14px', color: 'rgba(253,250,244,0.5)', marginTop: '4px' }}>
-                    <em>{sermons[activeIndex].scripture}</em> · {sermons[activeIndex].date}
+                    <em>{displaySermons[activeIndex].scripture}</em> · {displaySermons[activeIndex].date}
                   </p>
                 </div>
 
@@ -284,7 +298,7 @@ export default function Sermons() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {watchVideos.map((video, i) => (
+            {displaySermons.map((video, i) => (
               <div key={video.youtubeId ?? i} className="group">
                 {/* Video embed */}
                 <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
